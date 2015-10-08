@@ -94,27 +94,14 @@ public class AsyncText extends javax.swing.JFrame {
 
   private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     if(!jTextField1.getText().equals("")){
-	  new Thread(threadList(jTextField1.getText())).start();
+	   new Thread(threadList(jTextField1.getText())).start(); 
 	  jTextField1.setText("");
 	}
   }//GEN-LAST:event_jButton1ActionPerformed
 
   private Runnable threadList(String text){
-	Runnable thing = new Runnable() {
-
-	  @Override
-	  public void run() {
-		try {
-		  Thread.sleep(2000);
-		  DefaultListModel<String> model = (DefaultListModel<String>) jList1.getModel();
-		  model.addElement(text);
-		  jList1.setModel(model);
-		} catch (InterruptedException ex) {
-		  Logger.getLogger(AsyncText.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	  }
-	};
-	return thing;
+	ThreadList runnable = new ThreadList(jList1, text);
+	return runnable;
   }
   
   /**
